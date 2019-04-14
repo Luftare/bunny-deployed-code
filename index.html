@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<title>
+Cloud Bunny
+</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, minimal-ui, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="style.css">
+<div id="app" hidden>
+  <div v-show="!loading">
+    <canvas id="canvas"></canvas>
+    <div class="layer margins" v-show="!scoreScreen">
+      <span class="big">{{points}}</span>
+    </div>
+    <div class="layer vertical-center" v-show="scoreScreen">
+      <div class="container center">
+        <span class="big">{{points}}</span>
+        </br>
+        <span class="small" v-show="topScore" hidden>Name:</span>
+        </br>
+        <table class="center small" v-show="!topScore">
+          <template v-for="score in scores" class="inline">
+            <tr class="left">
+              <td>{{score.name}}</td>
+              <td>{{score.value}}</td>
+            </tr>
+          </template>
+        </table>
+        <div v-show="topScore" hidden>
+          <input type="text" v-model="playerName" class="small center big-input"/>
+          <button @click="submit" class="medium" v-show="validName">SUBMIT</button>
+        </div>
+        <button class="big" @click="newGame">PLAY</button>
+      </div>
+    </div>
+  </div>
+  <div class="layer margin-top center big" v-show="loading">
+    LOADING...
+  </div>
+</div>
+<script src="main.js"></script>
+<script>
+document.getElementById("app").hidden = false;
+</script>
